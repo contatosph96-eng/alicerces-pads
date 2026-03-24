@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alicerces - Pad Sampler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-top">
+            <div class="volume-control-header" id="volumeControlHeader" style="display: none;">
+                <label for="volumeSlider">Master Volume</label>
+                <input type="range" id="volumeSlider" min="0" max="100" value="100">
+                <span class="volume-display" id="volumeDisplay">100%</span>
+            </div>
+            <div class="header-actions" id="headerActions"></div>
+        </div>
+        
+        <h1>🎛️ Alicerces Pads</h1>
+
+        <div id="userControls" style="display: none;">
+            <div class="controls">
+                <div class="input-group">
+                    <input type="text" id="padName" placeholder="Nome do Pad" maxlength="30">
+                    <input type="file" id="audioFile" accept="audio/*">
+                    <button class="btn-add" onclick="addPad()">+ Adicionar Pad</button>
+                    <button class="btn-add" onclick="openBatchModal()" style="background: #cc0000;">⚡ Vários Pads</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Batch -->
+        <div id="batchModal" class="modal">
+            <div class="modal-content">
+                <h2>📦 Criar Vários Pads</h2>
+                <p>Adicione múltiplos pads de uma vez. Clique em "+ Adicionar Linha" para mais campos.</p>
+                <div id="batchInputs" class="batch-inputs">
+                    <div class="batch-input-row">
+                        <input type="text" class="batch-pad-name" placeholder="Nome do Pad" maxlength="30">
+                        <input type="file" class="batch-pad-file" accept="audio/*">
+                        <button type="button" class="remove-row-btn" onclick="removeInputRow(this)" style="display: none;">✕</button>
+                    </div>
+                </div>
+                <button type="button" class="add-row-btn" onclick="addInputRow()">+ Adicionar Linha</button>
+                <div class="modal-buttons" style="margin-top: 20px;">
+                    <button class="btn-cancel" onclick="closeBatchModal()">Cancelar</button>
+                    <button class="btn-submit" onclick="saveBatchPads()">Criar Pads</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Login Admin -->
+        <div id="loginModal" class="login-modal">
+            <div class="login-modal-content">
+                <h2>🔐 Painel Administrativo</h2>
+                <p style="color: #666; margin-bottom: 20px;">Digite a senha de administrador</p>
+                <input type="password" id="adminPassword" placeholder="Senha do Admin" maxlength="50">
+                <div class="login-buttons">
+                    <button class="btn-cancel" onclick="document.getElementById('loginModal').classList.remove('active')">Cancelar</button>
+                    <button class="btn-submit" onclick="loginAdmin()">Entrar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Gerenciar Pads Admin -->
+        <div id="managePadsModal" class="modal">
+            <div class="modal-content" style="max-width: 600px;">
+                <h2>🎛️ Gerenciar Pads</h2>
+                <p>Clique em um pad para deletá-lo ou veja todos os pads criados</p>
+                <div id="managePadsGrid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; max-height: 400px; overflow-y: auto; margin-bottom: 20px; padding: 15px; background: #f5f5f5; border-radius: 8px;">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeManagePadsModal()">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Editar Pad Admin -->
+        <div id="editPadModal" class="modal">
+            <div class="modal-content">
+                <h2>✏️ Editar Pad</h2>
+                <input type="hidden" id="editPadId">
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Nome do Pad</label>
+                    <input type="text" id="editPadName" placeholder="Digite o nome do pad" maxlength="30" style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 8px; font-size: 14px;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; margin-bottom: 5px; font-weight: 600;">Adicionar Áudio</label>
+                    <input type="file" id="editAudioFile" accept="audio/*" style="width: 100%; padding: 8px; border: 2px solid #ddd; border-radius: 8px;">
+                </div>
+                <div style="margin-bottom: 20px; padding: 10px; background: #f5f5f5; border-radius: 8px; text-align: center;">
+                    <span id="editAudioStatus" style="font-weight: 600; font-size: 14px;">✗ Sem áudio</span>
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancel" onclick="closeEditPadModal()">Cancelar</button>
+                    <button class="btn-submit" onclick="saveEditPad()">💾 Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid de Pads -->
+        <div class="pads-grid" id="padsGrid">
+            <div class="empty-state">
+                <svg fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+                </svg>
+                <p>Nenhum pad adicionado. Crie um novo para começar!</p>
+            </div>
+        </div>
+
+        <footer class="app-footer">
+            <p>© 2026 Alicerces - @Paulo Henrique Felipes de Paula</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script src="admin.js"></script>
+    <script>
+        // Mostrar/ocultar controles de usuário baseado no modo
+        function updateUserControlsVisibility() {
+            const userControls = document.getElementById('userControls');
+            const volumeControl = document.getElementById('volumeControlHeader');
+            if (adminMode && adminAuthenticated) {
+                userControls.style.display = 'block';
+                volumeControl.style.display = 'none';
+            } else {
+                userControls.style.display = 'none';
+                volumeControl.style.display = 'flex';
+            }
+        }
+
+        // Interceptar renderPads original para atualizar visibilidade
+        const originalRenderPads = window.renderPads;
+        window.renderPads = function() {
+            originalRenderPads();
+            updateUserControlsVisibility();
+        };
+
+        // Inicializar
+        updateUserControlsVisibility();
+    </script>
+</body>
+</html>
