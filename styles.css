@@ -12,6 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    overflow-x: hidden;
 }
 
 .container {
@@ -23,6 +24,7 @@ body {
     max-width: 1000px;
     width: 100%;
     animation: slideDown 0.5s ease-out;
+    min-height: auto;
 }
 
 @keyframes slideDown {
@@ -137,6 +139,7 @@ input[type="number"] {
     border-radius: 8px;
     font-size: 14px;
     transition: all 0.3s;
+    min-height: 44px;
 }
 
 input[type="text"]:focus,
@@ -156,6 +159,7 @@ button {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s;
+    min-height: 44px;
 }
 
 .btn-add {
@@ -664,46 +668,646 @@ input[type="range"] {
     font-size: 12px;
 }
 
-@media (max-width: 768px) {
+/* ========== TABLET: 768px - 1024px ========== */
+@media (max-width: 1024px) {
     .container {
-        padding: 20px;
+        max-width: 95%;
+        padding: 25px;
     }
 
     h1 {
-        font-size: 1.8em;
+        font-size: 2.3em;
+        margin-bottom: 25px;
     }
 
     .controls {
-        flex-direction: column;
+        padding: 18px;
+        gap: 12px;
     }
 
     .input-group {
-        min-width: auto;
+        flex-wrap: wrap;
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
     }
 
     .pad {
-        padding: 20px 15px;
+        padding: 25px 15px;
     }
 
-    .pad-name {
-        font-size: 14px;
+    .header-top {
+        flex-direction: column;
+        gap: 12px;
+        align-items: stretch;
+    }
+
+    .header-actions {
+        justify-content: center;
     }
 
     .admin-panel {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+/* ========== TABLET: 600px - 768px ========== */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+        padding: 15px;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+        max-width: none;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.3em;
+    }
+
+    .header-top {
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 15px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .btn-admin {
+        padding: 11px 18px;
+        font-size: 13px;
+        min-height: 44px;
+        flex: 1;
+    }
+
+    .volume-control-header {
+        width: 100%;
+        justify-content: space-between;
+        padding: 12px;
+        order: 0;
+    }
+
+    .volume-control-header label {
+        min-width: auto;
+        font-size: 13px;
+    }
+
+    .volume-control-header input[type="range"] {
+        width: 100px;
+        flex: 1;
+        max-width: 150px;
+    }
+
+    .volume-display {
+        min-width: 40px;
+        font-size: 12px;
+    }
+
+    .controls {
+        padding: 15px;
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .input-group {
+        flex-direction: column;
+        width: 100%;
+        min-width: auto;
+        gap: 8px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="password"],
+    input[type="number"] {
+        padding: 12px;
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    button {
+        min-height: 44px;
+        font-size: 13px;
+        padding: 10px 15px;
+    }
+
+    .btn-add {
+        width: 100%;
+    }
+
+    .pads-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .pad {
+        padding: 18px 12px;
+        min-height: 130px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pad-content {
+        gap: 8px;
+    }
+
+    .pad-name {
+        font-size: 13px;
+        line-height: 1.3;
+    }
+
+    .pad-status {
+        font-size: 11px;
+    }
+
+    .pad-delete {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+
+    .pad-volume-control {
+        margin-top: 10px;
+        padding: 8px 10px;
+        gap: 6px;
+    }
+
+    .pad-volume-slider {
+        height: 4px;
+    }
+
+    .pad-volume-slider::-webkit-slider-thumb {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pad-volume-slider::-moz-range-thumb {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pad-volume-display {
+        font-size: 11px;
+        min-width: 45px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        max-width: none;
+    }
+
+    .login-modal-content {
+        width: 95%;
+        padding: 30px 20px;
+        max-width: none;
+    }
+
+    .login-modal-content h2 {
+        font-size: 1.5em;
+        margin-bottom: 20px;
+    }
+
+    .login-modal-content input,
+    .modal-content input {
+        font-size: 16px;
+        min-height: 44px;
+    }
+
+    .login-buttons,
+    .modal-buttons {
+        flex-direction: column-reverse;
+        gap: 8px;
+    }
+
+    .login-buttons button,
+    .modal-buttons button {
+        width: 100%;
+    }
+
+    .batch-inputs {
+        gap: 12px;
+    }
+
+    .batch-input-row {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .batch-inputs input {
+        width: 100%;
+    }
+
+    .admin-panel {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .admin-section {
+        padding: 15px;
     }
 
     .volume-control {
+        width: 100%;
         flex-direction: column;
-        align-items: stretch;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .volume-control label {
+        min-width: auto;
+        font-size: 13px;
     }
 
     input[type="range"] {
         width: 100%;
+    }
+
+    .empty-state {
+        padding: 40px 20px;
+        font-size: 16px;
+    }
+
+    .empty-state svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+
+    .app-footer {
+        margin-top: 20px;
+        padding-top: 15px;
+        font-size: 12px;
+    }
+}
+
+/* ========== CELULAR: 480px - 600px ========== */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+        min-height: 100vh;
+    }
+
+    .container {
+        padding: 15px;
+        border-radius: 12px;
+        max-width: none;
+    }
+
+    h1 {
+        font-size: 1.6em;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .header-actions {
+        gap: 6px;
+    }
+
+    .btn-admin {
+        padding: 10px 12px;
+        font-size: 12px;
+        min-height: 42px;
+    }
+
+    .volume-control-header {
+        padding: 10px;
+        gap: 8px;
+    }
+
+    .volume-control-header label {
+        font-size: 12px;
+    }
+
+    .volume-control-header input[type="range"] {
+        width: 80px;
+    }
+
+    .controls {
+        padding: 12px;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+
+    .input-group {
+        gap: 6px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="password"] {
+        padding: 11px;
+        font-size: 16px;
+        min-height: 42px;
+    }
+
+    button {
+        min-height: 42px;
+        font-size: 12px;
+        padding: 9px 12px;
+    }
+
+    .pads-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 8px;
+    }
+
+    .pad {
+        padding: 15px 10px;
+        min-height: 120px;
+        font-size: 14px;
+    }
+
+    .pad-name {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .pad-status {
+        font-size: 10px;
+    }
+
+    .pad-delete {
+        width: 26px;
+        height: 26px;
+        font-size: 14px;
+        top: 3px;
+        right: 3px;
+    }
+
+    .pad-volume-control {
+        margin-top: 8px;
+        padding: 6px 8px;
+        gap: 5px;
+    }
+
+    .pad-volume-display {
+        font-size: 10px;
+        min-width: 40px;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 15px;
+    }
+
+    .modal-content h2 {
+        font-size: 1.2em;
+        margin-bottom: 15px;
+    }
+
+    .login-modal-content {
+        padding: 25px 15px;
+    }
+
+    .login-modal-content h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+
+    .login-modal-content p {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .batch-inputs {
+        gap: 10px;
+    }
+
+    .empty-state {
+        padding: 30px 15px;
+        font-size: 14px;
+    }
+
+    .empty-state svg {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 10px;
+    }
+
+    .app-footer {
+        margin-top: 15px;
+        padding-top: 10px;
+        font-size: 11px;
+    }
+}
+
+/* ========== CELULAR PEQUENO: até 480px ========== */
+@media (max-width: 480px) {
+    body {
+        padding: 8px;
+    }
+
+    .container {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    h1 {
+        font-size: 1.4em;
+        margin-bottom: 12px;
+    }
+
+    h2 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+    }
+
+    .header-top {
+        gap: 8px;
+    }
+
+    .btn-admin {
+        padding: 9px 10px;
+        font-size: 11px;
+        min-height: 40px;
+    }
+
+    .volume-control-header {
+        padding: 8px;
+        gap: 6px;
+    }
+
+    .volume-control-header label {
+        font-size: 11px;
+        min-width: auto;
+    }
+
+    .volume-control-header input[type="range"] {
+        width: 70px;
+    }
+
+    .controls {
+        padding: 10px;
+        gap: 6px;
+        margin-bottom: 15px;
+    }
+
+    input[type="text"],
+    input[type="file"],
+    input[type="password"] {
+        padding: 10px;
+        font-size: 15px;
+        min-height: 40px;
+    }
+
+    button {
+        min-height: 40px;
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+
+    .pads-grid {
+        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+        gap: 6px;
+    }
+
+    .pad {
+        padding: 12px 8px;
+        min-height: 110px;
+        font-size: 13px;
+    }
+
+    .pad-name {
+        font-size: 11px;
+        line-height: 1.2;
+    }
+
+    .pad-status {
+        font-size: 9px;
+    }
+
+    .pad-delete {
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+        top: 2px;
+        right: 2px;
+    }
+
+    .pad-volume-control {
+        margin-top: 6px;
+        padding: 5px 6px;
+        gap: 4px;
+    }
+
+    .pad-volume-slider {
+        height: 3px;
+    }
+
+    .pad-volume-slider::-webkit-slider-thumb {
+        width: 14px;
+        height: 14px;
+    }
+
+    .pad-volume-slider::-moz-range-thumb {
+        width: 14px;
+        height: 14px;
+    }
+
+    .pad-volume-display {
+        font-size: 9px;
+        min-width: 35px;
+    }
+
+    .modal-content {
+        width: 98%;
+        padding: 12px;
+    }
+
+    .login-modal-content {
+        width: 98%;
+        padding: 20px 12px;
+    }
+
+    .login-modal-content h2 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+    }
+
+    .login-modal-content p {
+        font-size: 11px;
+        margin-bottom: 12px;
+    }
+
+    .login-modal-content input,
+    .modal-content input {
+        font-size: 15px;
+        min-height: 40px;
+        padding: 9px;
+    }
+
+    .batch-input-row {
+        gap: 6px;
+    }
+
+    .add-row-btn {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .empty-state {
+        padding: 20px 10px;
+        font-size: 13px;
+    }
+
+    .empty-state svg {
+        width: 45px;
+        height: 45px;
+        margin-bottom: 8px;
+    }
+
+    .app-footer {
+        margin-top: 12px;
+        padding-top: 8px;
+        font-size: 10px;
+    }
+}
+
+/* ========== LAPTOP/DESKTOP: acima de 1024px ========== */
+@media (min-width: 1025px) {
+    .container {
+        max-width: 1100px;
+    }
+
+    .pads-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    .pad {
+        padding: 35px 25px;
+        min-height: 200px;
+    }
+
+    .pad:hover {
+        transform: translateY(-6px);
     }
 }
 
