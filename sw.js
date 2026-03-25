@@ -1,4 +1,4 @@
-const CACHE_NAME = 'alicerces-v2';
+const CACHE_NAME = 'alicerces-v3';
 const ASSETS = [
   './',
   './index.html',
