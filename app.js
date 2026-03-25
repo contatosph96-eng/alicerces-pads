@@ -190,3 +190,26 @@ if (masterSlider) {
 
 // Inicialização
 loadPads();
+
+// Lógica para Forçar Atualização e Limpar Cache
+const updateBtn = document.getElementById('update-app-btn');
+
+if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister(); // Remove o Service Worker antigo
+                }
+                // Limpa o cache de arquivos
+                caches.keys().then(names => {
+                    for (let name of names) caches.delete(name);
+                });
+                alert("Atualizando arquivos... O aplicativo irá reiniciar.");
+                window.location.reload(true); // Recarrega a página do zero
+            });
+        } else {
+            window.location.reload(true);
+        }
+    });
+}
