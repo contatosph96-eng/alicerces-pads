@@ -87,7 +87,7 @@ h2 {
 }
 
 .volume-control-header {
-    margin-left: 10%;
+    margin-left: 10px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -112,6 +112,29 @@ h2 {
 .volume-control-header input[type="range"] {
     width: 120px;
     cursor: pointer;
+}
+
+.btn-support {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #25D366;
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.btn-support:hover {
+    transform: translateY(-2px);
+    background: #20bd5a;
+    box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
 }
 
 .btn-admin {
@@ -269,12 +292,16 @@ input[type="range"] {
 
 .pads-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(4, 1fr);
+    align-content: center;
+    gap: 15px;
     margin-bottom: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
     flex: 1;
-    overflow-y: auto;
-    padding: 20px;
+    padding: 10px;
     text-align: center;
 }
 
@@ -287,8 +314,11 @@ input[type="range"] {
     background-position: center;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    border-radius: 8px;
-    padding: 20px 12px;
+    border-radius: 16px;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    padding: 15px;
     cursor: pointer;
     transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     color: #e0e0e0;
@@ -299,7 +329,6 @@ input[type="range"] {
     overflow: hidden;
     box-shadow: 0 8px 20px rgba(29, 38, 110, 0.281), inset 0 1px 0 rgba(255, 255, 255, 0.08);
     word-break: break-word;
-    min-height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -456,6 +485,10 @@ input[type="range"] {
     letter-spacing: -0.3px;
     z-index: 1;
     text-align: center;
+    position: absolute;
+    bottom: 15px;
+    left: 5px;
+    right: 5px;
     
 }
 
@@ -463,6 +496,12 @@ input[type="range"] {
     font-size: 12px;
     opacity: 0.8;
     height: 14px;
+    position: absolute;
+    top: 15px;
+    left: 5px;
+    right: 5px;
+    text-align: center;
+    z-index: 1;
 }
 
 .pad-badge {
@@ -656,118 +695,6 @@ input[type="range"] {
     box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15);
 }
 
-.admin-panel {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 30px;
-}
-
-.admin-section {
-    background: rgba(245, 245, 245, 0.8);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    padding: 20px;
-    border-radius: 16px;
-    border: 2px solid rgba(44, 44, 255, 0.1);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-}
-
-.admin-section h3 {
-    color: #333;
-    margin-bottom: 15px;
-    font-size: 1.2em;
-}
-
-.login-modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(8, 11, 34, 0.6);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-}
-
-.login-modal.active {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.login-modal-content {
-    background: rgba(20, 20, 30, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 40px;
-    border-radius: 16px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 44, 44, 0.2);
-    text-align: center;
-    animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border: 1px solid rgba(79, 44, 255, 0.25);
-    color: #e0e0e0;
-}
-
-.login-modal-content h2 {
-    color: #333333;
-    margin-bottom: 30px;
-    font-size: 1.8em;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.login-modal-content input {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 12px 15px;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    font-size: 14px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(5px);
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.login-modal-content input:focus {
-    outline: none;
-    border-color: #ff2c2c;
-    box-shadow: 0 0 0 4px rgba(255, 44, 44, 0.15), 0 4px 12px rgba(255, 44, 44, 0.2);
-}
-
-.login-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.admin-status {
-    background: linear-gradient(135deg, #ff2c2c 0%, #ff5555 50%, #cc0000 100%);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(255, 44, 44, 0.2);
-}
-
-.admin-logout {
-    background: #ff6b6b;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 12px;
-}
-
 /* ========== TABLET: 768px - 1024px ========== */
 @media (max-width: 1024px) {
     .container {
@@ -790,8 +717,9 @@ input[type="range"] {
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 12px;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
     .pad {
@@ -808,10 +736,6 @@ input[type="range"] {
         justify-content: center;
     }
 
-    .admin-panel {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
 }
 
 /* ========== TABLET: 600px - 768px ========== */
@@ -881,6 +805,12 @@ input[type="range"] {
         font-size: 12px;
     }
 
+    .btn-support {
+        width: 100%;
+        justify-content: center;
+        min-height: 44px;
+    }
+
     .controls {
         padding: 15px;
         gap: 10px;
@@ -914,14 +844,13 @@ input[type="range"] {
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 10px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .pad {
         padding: 18px 12px;
-        min-height: 130px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -977,30 +906,11 @@ input[type="range"] {
         max-width: none;
     }
 
-    .login-modal-content {
-        width: 95%;
-        padding: 30px 20px;
-        max-width: none;
-    }
-
-    .login-modal-content h2 {
-        font-size: 1.5em;
-        margin-bottom: 20px;
-    }
-
-    .login-modal-content input,
-    .modal-content input {
-        font-size: 16px;
-        min-height: 44px;
-    }
-
-    .login-buttons,
     .modal-buttons {
         flex-direction: column-reverse;
         gap: 8px;
     }
 
-    .login-buttons button,
     .modal-buttons button {
         width: 100%;
     }
@@ -1016,15 +926,6 @@ input[type="range"] {
 
     .batch-inputs input {
         width: 100%;
-    }
-
-    .admin-panel {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-
-    .admin-section {
-        padding: 15px;
     }
 
     .volume-control {
@@ -1106,6 +1007,12 @@ input[type="range"] {
         width: 80px;
     }
 
+    .btn-support {
+        min-height: 42px;
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
     .controls {
         padding: 12px;
         gap: 8px;
@@ -1131,13 +1038,12 @@ input[type="range"] {
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 8px;
     }
 
     .pad {
         padding: 15px 10px;
-        min-height: 120px;
         font-size: 14px;
     }
 
@@ -1176,20 +1082,6 @@ input[type="range"] {
 
     .modal-content h2 {
         font-size: 1.2em;
-        margin-bottom: 15px;
-    }
-
-    .login-modal-content {
-        padding: 25px 15px;
-    }
-
-    .login-modal-content h2 {
-        font-size: 1.4em;
-        margin-bottom: 15px;
-    }
-
-    .login-modal-content p {
-        font-size: 12px;
         margin-bottom: 15px;
     }
 
@@ -1260,6 +1152,12 @@ input[type="range"] {
         width: 70px;
     }
 
+    .btn-support {
+        min-height: 40px;
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
     .controls {
         padding: 10px;
         gap: 6px;
@@ -1281,13 +1179,12 @@ input[type="range"] {
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(95px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 6px;
     }
 
     .pad {
         padding: 12px 8px;
-        min-height: 110px;
         font-size: 13px;
     }
 
@@ -1338,22 +1235,6 @@ input[type="range"] {
         padding: 12px;
     }
 
-    .login-modal-content {
-        width: 98%;
-        padding: 20px 12px;
-    }
-
-    .login-modal-content h2 {
-        font-size: 1.3em;
-        margin-bottom: 12px;
-    }
-
-    .login-modal-content p {
-        font-size: 11px;
-        margin-bottom: 12px;
-    }
-
-    .login-modal-content input,
     .modal-content input {
         font-size: 15px;
         min-height: 40px;
@@ -1394,7 +1275,7 @@ input[type="range"] {
     }
 
     .pads-grid {
-        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        grid-template-columns: repeat(4, 1fr);
     }
 
     h1 {
@@ -1402,8 +1283,7 @@ input[type="range"] {
     }
 
     .pad {
-        padding: 35px 25px;
-        min-height: 200px;
+        padding: 20px;
     }
 
     .pad:hover {
