@@ -168,14 +168,17 @@ function updatePadUI(padId, isPlaying) {
 // Gerenciamento de Master Volume
 const masterSlider = document.getElementById('volumeSlider');
 if (masterSlider) {
-    masterSlider.addEventListener('input', function() {
+    const handleVolumeChange = function() {
         masterVolume = this.value / 100;
         document.getElementById('volumeDisplay').textContent = this.value + '%';
         currentlyPlaying.forEach((audio, padId) => {
             const pad = pads.find(p => p.id == padId);
             if (pad) audio.volume = (pad.volume / 100) * masterVolume;
         });
-    });
+    };
+
+    masterSlider.addEventListener('input', handleVolumeChange);
+    masterSlider.addEventListener('change', handleVolumeChange); // Adicionado para compatibilidade em alguns celulares
 }
 
 // Inicialização
