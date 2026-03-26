@@ -1,8 +1,6 @@
+
 let pads = [];
 let currentlyPlaying = new Map();
-let multiDeleteMode = false;
-let selectedForDelete = new Set();
-let adminMode = false;
 let masterVolume = 1.0;
 
 // Carregar pads do localStorage ou iniciar padrão
@@ -13,8 +11,9 @@ function loadPads() {
         
         // Se houver pads antigos ou genéricos, resetamos para a nova estrutura musical
         const hasOldPads = pads.some(pad => 
-            pad.name === '🎵 Test Pad' || 
-            pad.name.startsWith('Pad ') && /^\d+$/.test(pad.name.replace('Pad ', ''))
+            pad.name === '🎵 Test Pad' ||
+            pad.name.includes('🎵') || 
+            (pad.name.startsWith('Pad ') && /^\d+$/.test(pad.name.replace('Pad ', '')))
         );
         
         if (hasOldPads) {
@@ -32,18 +31,18 @@ function loadPads() {
 // Criar os 12 pads iniciais apontando para a pasta /pad
 function createInitialPads() {
     const padConfig = [
-        { name: '🎵 Pad em C', file: 'C.mp3' },
-        { name: '🎵 Pad em C# ou Db', file: 'Db.mp3' },
-        { name: '🎵 Pad em D', file: 'D.mp3' },
-        { name: '🎵 Pad em D# ou Eb', file: 'Eb.mp3' },
-        { name: '🎵 Pad em E', file: 'E.mp3' },
-        { name: '🎵 Pad em F', file: 'F.mp3' },
-        { name: '🎵 Pad em F# ou Gb', file: 'Gb.mp3' },
-        { name: '🎵 Pad em G', file: 'G.mp3' },
-        { name: '🎵 Pad em G# ou Ab', file: 'Ab.mp3' },
-        { name: '🎵 Pad em A', file: 'A.mp3' },
-        { name: '🎵 Pad em A# ou Bb', file: 'Bb.mp3' },
-        { name: '🎵 Pad em B', file: 'B.mp3' }
+        { name: 'C', file: 'C.mp3' },
+        { name: 'C# ou Db', file: 'Db.mp3' },
+        { name: 'D', file: 'D.mp3' },
+        { name: 'D# ou Eb', file: 'Eb.mp3' },
+        { name: 'E', file: 'E.mp3' },
+        { name: 'F', file: 'F.mp3' },
+        { name: 'F# ou Gb', file: 'Gb.mp3' },
+        { name: 'G', file: 'G.mp3' },
+        { name: 'G# ou Ab', file: 'Ab.mp3' },
+        { name: 'A', file: 'A.mp3' },
+        { name: 'A# ou Bb', file: 'Bb.mp3' },
+        { name: 'B', file: 'B.mp3' }
     ];
 
     pads = padConfig.map((config, i) => ({
@@ -71,19 +70,10 @@ function renderPads() {
         return;
     }
 
-    let html = '';
-    if (multiDeleteMode) {
-        html = `<div class="delete-info">🗑️ Selecione os pads para deletar | ${selectedForDelete.size} selecionado(s)</div>`;
-    }
-
-    html += pads.map(pad => {
-        const isEditable = !pad.adminOnly || adminMode;
+    const html = pads.map(pad => {
         return `
             <div class="pad-wrapper">
-                <button class="pad ${selectedForDelete.has(pad.id) ? 'selected' : ''}" 
-                        onclick="${multiDeleteMode ? `toggleDeleteSelection(${pad.id})` : `togglePad('${pad.id}')`}" 
-                        id="pad-${pad.id}">
-                    ${isEditable ? `<button class="pad-delete" onmousedown="startDeleteHold(event, '${pad.id}')">✕</button>` : ''}
+                <button class="pad" onclick="togglePad('${pad.id}')" id="pad-${pad.id}">
                     <div class="pad-content">
                         <div class="pad-name">${pad.name}</div>
                         <div class="pad-status" id="status-${pad.id}">●</div>
