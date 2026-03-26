@@ -1,9 +1,10 @@
-const CACHE_NAME = 'alicerces-v4';
+const CACHE_NAME = 'alicerces-v2';
 const ASSETS = [
   './',
   './index.html',
   './styles.css',
   './app.js',
+  './logo.png',
   './admin.js',
   './pad/C.mp3', './pad/Db.mp3', './pad/D.mp3', './pad/Eb.mp3',
   './pad/E.mp3', './pad/F.mp3', './pad/Gb.mp3', './pad/G.mp3',
